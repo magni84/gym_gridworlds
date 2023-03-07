@@ -32,7 +32,7 @@ class GridWorldEnv(gym.Env):
     
     metadata = {
         "render_modes": ["human", "ansi", "rgb_array"],
-        "render_fps": 4,
+                "render_fps": 4,
     }
 
     def __init__(
@@ -117,7 +117,9 @@ class GridWorldEnv(gym.Env):
                         else:
                             reward = step_reward
 
-                        li.append( (1.0, newstate, reward, False) )
+                        terminated = bytes(newletter) in b"G"
+
+                        li.append( (1.0, newstate, reward, terminated) )
 
 
         self.window_size = (min(64 * ncol, 512), min(64*nrow, 512))
